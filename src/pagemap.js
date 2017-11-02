@@ -7,6 +7,7 @@ const body = doc.querySelector('body');
 const black = pc => `rgba(0,0,0,${pc / 100})`;
 const defaults = {
     viewport: null,
+    content: null,
     styles: {
         'header,footer,section,article': black(8),
         'h1,a': black(10),
@@ -41,6 +42,7 @@ module.exports = (canvas, options) => {
     };
 
     const viewport = settings.viewport;
+    const content = settings.content;
     const find = sel => Array.from((viewport || doc).querySelectorAll(sel));
 
     let drag = false;
@@ -71,7 +73,7 @@ module.exports = (canvas, options) => {
     };
 
     const draw = () => {
-        rootRect = viewport ? Rect.ofContent(viewport) : Rect.ofDocument();
+        rootRect = viewport ? Rect.ofContent(content) : Rect.ofDocument();
         viewRect = viewport ? Rect.ofViewport(viewport) : Rect.ofWindow();
         scale = calcScale(rootRect.w, rootRect.h);
 
